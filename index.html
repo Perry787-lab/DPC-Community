@@ -1,0 +1,2745 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPC - Bundeswehr Community</title>
+    <style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+        }
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background: #0a0a0a;
+color: #ffffff;
+min-height: 100vh;
+position: relative;
+overflow-x: hidden;
+        }
+
+/* Bundeswehr Feldgrau Hintergrund */
+body::before {
+content: '';
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: 
+radial-gradient(circle at 15% 25%, rgba(70, 95, 60, 0.3) 0%, transparent 40%),
+radial-gradient(circle at 85% 75%, rgba(60, 75, 50, 0.2) 0%, transparent 50%),
+radial-gradient(circle at 45% 60%, rgba(80, 100, 70, 0.15) 0%, transparent 35%),
+linear-gradient(135deg, rgba(40, 55, 45, 0.8) 0%, rgba(20, 25, 20, 0.9) 50%, rgba(60, 80, 60, 0.7) 100%);
+z-index: -3;
+filter: contrast(1.2) brightness(0.85);
+        }
+
+/* Gewebestruktur-Effekt */
+body::after {
+content: '';
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-image: 
+linear-gradient(45deg, transparent 48%, rgba(70, 95, 60, 0.4) 49%, rgba(70, 95, 60, 0.4) 51%, transparent 52%),
+linear-gradient(-45deg, transparent 48%, rgba(60, 80, 60, 0.3) 49%, rgba(60, 80, 60, 0.3) 51%, transparent 52%),
+linear-gradient(90deg, transparent 48%, rgba(80, 100, 70, 0.2) 49%, rgba(80, 100, 70, 0.2) 50%, transparent 51%);
+background-size: 200px 200px, 150px 150px, 300px 300px;
+background-position: 0 0, 50px 50px, 100px 100px;
+z-index: -2;
+opacity: 0.5;
+        }
+
+/* Matrix-Effekt Hintergrund */
+.matrix-bg {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -2;
+pointer-events: none;
+opacity: 0.1;
+        }
+
+.matrix-char {
+position: absolute;
+color: #4a6b3a;
+font-family: 'Courier New', monospace;
+font-size: 14px;
+animation: matrixFall 8s linear infinite;
+        }
+
+@keyframes matrixFall {
+0% { transform: translateY(-100vh); opacity: 1; }
+100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+/* Erweiterte Partikel */
+.particles {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -2;
+pointer-events: none;
+        }
+
+.particle {
+position: absolute;
+border-radius: 50%;
+animation: float 20s infinite linear;
+        }
+
+.particle.rust {
+width: 3px;
+height: 3px;
+background: #4a6b3a;
+box-shadow: 0 0 6px #4a6b3a;
+        }
+
+.particle.metal {
+width: 2px;
+height: 2px;
+background: #607050;
+box-shadow: 0 0 4px #607050;
+        }
+
+.particle.spark {
+width: 1px;
+height: 1px;
+background: #5a8a4a;
+box-shadow: 0 0 3px #5a8a4a;
+        }
+
+@keyframes float {
+0% {
+transform: translateY(100vh) translateX(0px) rotate(0deg);
+opacity: 0;
+            }
+10% {
+opacity: 1;
+            }
+90% {
+opacity: 1;
+            }
+100% {
+transform: translateY(-100px) translateX(200px) rotate(360deg);
+opacity: 0;
+            }
+        }
+
+/* Bundeswehr Symbolhintergrund */
+.tank-bg {
+position: fixed;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+z-index: -1;
+opacity: 0.08;
+pointer-events: none;
+        }
+
+.tank-silhouette {
+position: absolute;
+opacity: 0.3;
+animation: tankMove 25s ease-in-out infinite;
+font-size: 12rem;
+color: #4a6b3a;
+filter: sepia(0.2) hue-rotate(50deg);
+        }
+
+@keyframes tankMove {
+0%, 100% { transform: translateX(0px) rotate(0deg); }
+25% { transform: translateX(50px) rotate(2deg); }
+50% { transform: translateX(30px) rotate(-1deg); }
+75% { transform: translateX(-20px) rotate(1deg); }
+        }
+
+.tank1 {
+bottom: 10%;
+left: 5%;
+animation-delay: 0s;
+        }
+
+.tank2 {
+top: 20%;
+right: 10%;
+animation-delay: 12s;
+        }
+
+.tank3 {
+bottom: 60%;
+left: 80%;
+animation-delay: 8s;
+        }
+
+/* Header mit Bundeswehr-Stil */
+.header {
+background: linear-gradient(135deg, rgba(50, 70, 55, 0.95) 0%, rgba(30, 40, 35, 0.95) 50%, rgba(60, 85, 65, 0.95) 100%);
+padding: 2rem;
+box-shadow: 
+0 4px 30px rgba(70, 95, 60, 0.3), 
+inset 0 1px 0 rgba(100, 130, 90, 0.3),
+inset 0 -2px 10px rgba(0, 0, 0, 0.3);
+border-bottom: 3px solid #5a8a4a;
+backdrop-filter: blur(15px);
+position: relative;
+overflow: hidden;
+border-top: 2px solid rgba(60, 80, 60, 0.6);
+        }
+
+.header::before {
+content: '🎖️';
+position: absolute;
+top: 1rem;
+left: 2rem;
+font-size: 2rem;
+opacity: 0.4;
+filter: sepia(0.3) hue-rotate(50deg);
+        }
+
+.header::after {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(80, 100, 70, 0.2), transparent);
+animation: shine 4s ease-in-out infinite;
+        }
+
+@keyframes shine {
+0% { left: -100%; }
+100% { left: 100%; }
+        }
+
+.login-btn {
+position: absolute;
+top: 1.5rem;
+right: 2rem;
+background: rgba(70, 95, 60, 0.3);
+color: #c8d4c8;
+border: 2px solid rgba(80, 100, 70, 0.6);
+padding: 0.5rem 1rem;
+cursor: pointer;
+border-radius: 4px;
+font-weight: 600;
+transition: all 0.3s ease;
+font-size: 0.9rem;
+backdrop-filter: blur(5px);
+box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+.login-btn:hover {
+background: rgba(80, 100, 70, 0.4);
+border-color: rgba(70, 95, 60, 0.8);
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(70, 95, 60, 0.4);
+        }
+
+.logo {
+text-align: center;
+margin-bottom: 2rem;
+position: relative;
+        }
+
+.logo h1 {
+font-size: 3.5rem;
+color: #c8d4c8;
+text-shadow: 
+0 0 20px rgba(80, 100, 70, 0.6),
+2px 2px 4px rgba(0, 0, 0, 0.8);
+letter-spacing: 4px;
+font-weight: 900;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 1rem;
+position: relative;
+filter: contrast(1.2);
+        }
+
+.logo h1::before {
+content: '⭐';
+filter: sepia(0.2) hue-rotate(50deg) brightness(0.9);
+        }
+
+.logo h1::after {
+content: '⭐';
+filter: sepia(0.2) hue-rotate(50deg) brightness(0.9);
+        }
+
+.logo p {
+color: #5a8a4a;
+font-size: 1.2rem;
+margin-top: 0.5rem;
+letter-spacing: 3px;
+text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+/* Erweiterte Navigation */
+.nav-tabs {
+display: flex;
+justify-content: center;
+gap: 1rem;
+flex-wrap: wrap;
+        }
+
+.tab-btn {
+background: linear-gradient(135deg, rgba(50, 70, 55, 0.8) 0%, rgba(35, 50, 40, 0.9) 100%);
+color: #d8e8d8;
+border: 2px solid #5a8a4a;
+padding: 1rem 2rem;
+font-size: 1.1rem;
+cursor: pointer;
+transition: all 0.3s ease;
+border-radius: 4px;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 1px;
+position: relative;
+overflow: hidden;
+box-shadow: 
+inset 0 1px 0 rgba(255, 255, 255, 0.1),
+0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+.tab-btn::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 100%;
+height: 100%;
+background: linear-gradient(90deg, transparent, rgba(80, 100, 70, 0.3), transparent);
+transition: left 0.5s;
+        }
+
+.tab-btn:hover::before {
+left: 100%;
+        }
+
+.tab-btn:hover {
+background: linear-gradient(135deg, #5a8a4a 0%, #6a9a5a 100%);
+color: #f0f8f0;
+transform: translateY(-3px);
+box-shadow: 0 8px 25px rgba(90, 138, 74, 0.4);
+        }
+
+.tab-btn.active {
+background: linear-gradient(135deg, #5a8a4a 0%, #6a9a5a 100%);
+color: #f0f8f0;
+box-shadow: 0 4px 15px rgba(90, 138, 74, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+.container {
+max-width: 1400px;
+margin: 2rem auto;
+padding: 0 2rem;
+        }
+
+.content-section {
+display: none;
+        }
+
+.content-section.active {
+display: block;
+animation: fadeInSlide 0.6s ease;
+        }
+
+@keyframes fadeInSlide {
+from {
+opacity: 0;
+transform: translateY(30px);
+            }
+to {
+opacity: 1;
+transform: translateY(0);
+            }
+        }
+
+.section-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 2rem;
+position: relative;
+        }
+
+.section-header::after {
+content: '';
+position: absolute;
+bottom: -10px;
+left: 0;
+width: 100px;
+height: 3px;
+background: linear-gradient(90deg, #4a6b3a, transparent);
+        }
+
+.add-btn {
+background: linear-gradient(135deg, #4a6b3a 0%, #5a8a4a 100%);
+color: #e8f4e8;
+border: none;
+padding: 0.8rem 1.5rem;
+cursor: pointer;
+border-radius: 4px;
+font-weight: 700;
+transition: all 0.3s ease;
+display: none;
+position: relative;
+overflow: hidden;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+.add-btn::before {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+width: 0;
+height: 0;
+background: rgba(255, 255, 255, 0.2);
+border-radius: 50%;
+transition: all 0.3s ease;
+transform: translate(-50%, -50%);
+        }
+
+.add-btn:hover::before {
+width: 300px;
+height: 300px;
+        }
+
+.add-btn.visible {
+display: inline-block;
+        }
+
+.add-btn:hover {
+transform: scale(1.05) translateY(-2px);
+box-shadow: 0 8px 25px rgba(70, 95, 60, 0.6);
+        }
+
+.application-item {
+background: rgba(25, 25, 25, 0.8);
+border: 1px solid #5a8a4a;
+border-radius: 4px;
+padding: 1rem;
+margin-bottom: 1rem;
+position: relative;
+z-index: 1;
+        }
+
+.application-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 0.5rem;
+        }
+
+.application-name {
+color: #c8d4c8;
+font-weight: bold;
+        }
+
+.application-date {
+color: #5a8a4a;
+font-size: 0.9rem;
+        }
+
+.application-details {
+color: #cccccc;
+font-size: 0.9rem;
+margin-bottom: 1rem;
+        }
+
+.application-actions {
+display: flex;
+gap: 0.5rem;
+        }
+
+.btn-approve {
+background: linear-gradient(135deg, #228B22 0%, #32CD32 100%);
+color: white;
+border: none;
+padding: 0.5rem 1rem;
+border-radius: 4px;
+cursor: pointer;
+font-weight: 600;
+transition: all 0.3s ease;
+        }
+
+.btn-approve:hover {
+background: linear-gradient(135deg, #32CD32 0%, #228B22 100%);
+transform: translateY(-2px);
+        }
+
+.btn-reject {
+background: linear-gradient(135deg, #DC143C 0%, #FF6347 100%);
+color: white;
+border: none;
+padding: 0.5rem 1rem;
+border-radius: 4px;
+cursor: pointer;
+font-weight: 600;
+transition: all 0.3s ease;
+        }
+
+.btn-reject:hover {
+background: linear-gradient(135deg, #FF6347 0%, #DC143C 100%);
+transform: translateY(-2px);
+        }
+
+.gallery-item {
+background: linear-gradient(135deg, rgba(45, 60, 50, 0.9) 0%, rgba(30, 40, 35, 0.9) 100%);
+border: 2px solid #5a8a4a;
+border-radius: 8px;
+overflow: hidden;
+transition: all 0.3s ease;
+cursor: pointer;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+.gallery-item:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 40px rgba(70, 95, 60, 0.3);
+        }
+
+.gallery-image {
+width: 100%;
+height: 200px;
+background: linear-gradient(45deg, #2a3a2a, #4a5a4a);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 3rem;
+color: #c8d4c8;
+        }
+
+.gallery-info {
+padding: 1.5rem;
+        }
+
+/* Galerie Grid */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+    margin: 1.5rem 0 3rem 0;
+}
+
+.gallery-thumb {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+    filter: contrast(0.95) saturate(0.95);
+}
+
+.gallery-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(12,12,12,0.6), rgba(28,28,28,0.6));
+    border: 1px solid rgba(90,138,74,0.09);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    position: relative;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-10px) scale(1.01);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+.card-overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0.7) 100%);
+    color: #ffffff;
+    padding: 0.85rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.gallery-info {
+    padding: 0;
+}
+
+.gallery-title {
+    color: #f6f6f6;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+}
+
+.gallery-desc {
+    color: #d7d7d7;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+.badge {
+    background: rgba(90,138,74,0.14);
+    border: 1px solid rgba(90,138,74,0.22);
+    color: #dfeee0;
+    padding: 0.25rem 0.45rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Lightbox overrides (reusing modal styles) */
+.lightbox-image {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    display: block;
+}
+
+.lightbox-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.lightbox-btn {
+    background: rgba(90,138,74,0.15);
+    border: 2px solid rgba(90,138,74,0.25);
+    color: #c8d4c8;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lightbox-btn:hover {
+    background: rgba(90,138,74,0.25);
+    border-color: rgba(90,138,74,0.4);
+}
+
+/* Image switch animation */
+@keyframes imageFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes imageFadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+#lightboxImg.fade-out {
+    animation: imageFadeOut 0.25s ease forwards;
+}
+
+#lightboxImg.fade-in {
+    animation: imageFadeIn 0.35s ease forwards;
+}
+
+/* Close animation */
+@keyframes modalFadeOutClose {
+    0% {
+        opacity: 1;
+        backdrop-filter: blur(5px);
+    }
+    100% {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+}
+
+.modal.closing {
+    animation: modalFadeOutClose 0.3s ease forwards !important;
+}
+
+.modal-content.closing-content {
+    animation: modalSlideOut 0.3s ease forwards !important;
+}
+
+@keyframes modalSlideOut {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-30px) scale(0.95);
+        opacity: 0;
+    }
+}
+
+.gallery-title {
+color: #c8d4c8;
+font-size: 1.3rem;
+font-weight: bold;
+margin-bottom: 0.5rem;
+        }
+
+.gallery-desc {
+color: #cccccc;
+line-height: 1.5;
+        }
+
+/* Events Sektion */
+.events-timeline {
+position: relative;
+padding: 2rem 0;
+        }
+
+.events-timeline::before {
+content: '';
+position: absolute;
+left: 50%;
+top: 0;
+bottom: 0;
+width: 4px;
+background: linear-gradient(180deg, #4a6b3a 0%, #5a8a4a 50%, #4a6b3a 100%);
+transform: translateX(-50%);
+        }
+
+.event-item {
+display: flex;
+margin-bottom: 3rem;
+position: relative;
+        }
+
+.event-item:nth-child(odd) {
+flex-direction: row;
+        }
+
+.event-item:nth-child(even) {
+flex-direction: row-reverse;
+        }
+
+.event-content {
+width: 45%;
+background: linear-gradient(135deg, rgba(45, 60, 50, 0.9) 0%, rgba(30, 40, 35, 0.9) 100%);
+padding: 2rem;
+border-radius: 8px;
+border: 2px solid #5a8a4a;
+transition: all 0.3s ease;
+position: relative;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+.event-content:hover {
+transform: scale(1.05);
+box-shadow: 0 15px 40px rgba(70, 95, 60, 0.3);
+        }
+
+.event-marker {
+width: 30px;
+height: 30px;
+background: #4a6b3a;
+border: 5px solid #1a1a1a;
+border-radius: 50%;
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+box-shadow: 0 0 20px rgba(70, 95, 60, 0.6);
+        }
+
+.event-date {
+color: #5a8a4a;
+font-weight: bold;
+font-size: 1.1rem;
+margin-bottom: 1rem;
+        }
+
+.event-title {
+color: #c8d4c8;
+font-size: 1.4rem;
+font-weight: bold;
+margin-bottom: 1rem;
+        }
+
+.event-desc {
+color: #cccccc;
+line-height: 1.6;
+        }
+
+/* Ankündigungen */
+.announcements-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+gap: 2rem;
+        }
+
+.announcement-card {
+background: linear-gradient(135deg, rgba(45, 60, 50, 0.9) 0%, rgba(30, 40, 35, 0.9) 100%);
+border: 2px solid #5a8a4a;
+border-radius: 8px;
+padding: 2rem;
+transition: all 0.3s ease;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+backdrop-filter: blur(10px);
+position: relative;
+overflow: hidden;
+        }
+
+.announcement-card::before {
+content: '🎯';
+position: absolute;
+top: 1rem;
+right: 1rem;
+font-size: 1.5rem;
+opacity: 0.3;
+filter: sepia(1) hue-rotate(25deg);
+        }
+
+.announcement-card:hover {
+transform: translateY(-8px);
+box-shadow: 0 12px 35px rgba(70, 95, 60, 0.3);
+border-color: #5a8a4a;
+        }
+
+.announcement-card h3 {
+color: #D2B48C;
+margin-bottom: 1rem;
+font-size: 1.5rem;
+border-bottom: 2px solid #8B4513;
+padding-bottom: 0.5rem;
+        }
+
+.announcement-card .date {
+color: #A0522D;
+font-size: 0.9rem;
+margin-bottom: 1rem;
+        }
+
+.announcement-card p {
+color: #cccccc;
+line-height: 1.6;
+        }
+
+.delete-btn {
+position: absolute;
+top: 1rem;
+right: 1rem;
+background: #DC143C;
+color: white;
+border: none;
+padding: 0.3rem 0.6rem;
+cursor: pointer;
+border-radius: 4px;
+font-size: 0.8rem;
+display: none;
+z-index: 2;
+transition: all 0.3s ease;
+        }
+
+.delete-btn:hover {
+background: #FF6347;
+transform: scale(1.1);
+        }
+
+.delete-btn.visible {
+display: block;
+        }
+
+/* Timeline Styles */
+.timeline {
+position: relative;
+padding: 2rem 0;
+        }
+
+.timeline::before {
+content: '';
+position: absolute;
+left: 50%;
+top: 0;
+bottom: 0;
+width: 4px;
+background: linear-gradient(180deg, #4a6b3a 0%, #5a8a4a 100%);
+transform: translateX(-50%);
+        }
+
+.timeline-item {
+display: flex;
+margin-bottom: 3rem;
+position: relative;
+        }
+
+.timeline-item:nth-child(odd) {
+flex-direction: row;
+        }
+
+.timeline-item:nth-child(even) {
+flex-direction: row-reverse;
+        }
+
+.timeline-content {
+width: 45%;
+background: linear-gradient(135deg, rgba(45, 60, 50, 0.9) 0%, rgba(30, 40, 35, 0.9) 100%);
+padding: 2rem;
+border-radius: 8px;
+border: 2px solid #5a8a4a;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+transition: all 0.3s ease;
+backdrop-filter: blur(10px);
+position: relative;
+overflow: hidden;
+        }
+
+.timeline-content:hover {
+transform: scale(1.05);
+box-shadow: 0 15px 40px rgba(70, 95, 60, 0.3);
+        }
+
+.timeline-marker {
+width: 24px;
+height: 24px;
+background: #4a6b3a;
+border: 4px solid #1a1a1a;
+border-radius: 50%;
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+box-shadow: 0 0 20px rgba(70, 95, 60, 0.6);
+        }
+
+.timeline-content h3 {
+color: #c8d4c8;
+margin-bottom: 0.5rem;
+font-size: 1.5rem;
+        }
+
+.timeline-content .year {
+color: #5a8a4a;
+font-weight: 700;
+font-size: 1.2rem;
+margin-bottom: 1rem;
+        }
+
+.timeline-content p {
+color: #cccccc;
+line-height: 1.6;
+        }
+
+/* Discord Integration erweitert */
+.discord-section {
+background: linear-gradient(135deg, rgba(88, 101, 242, 0.15) 0%, rgba(47, 79, 79, 0.9) 100%);
+border: 2px solid #5865f2;
+border-radius: 8px;
+padding: 2rem;
+margin-bottom: 2rem;
+position: relative;
+overflow: hidden;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+.discord-header {
+display: flex;
+align-items: center;
+gap: 1rem;
+margin-bottom: 1.5rem;
+position: relative;
+z-index: 1;
+        }
+
+.discord-icon {
+font-size: 2rem;
+        }
+
+.discord-stats {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 1rem;
+margin-top: 1rem;
+position: relative;
+z-index: 1;
+        }
+
+.discord-stat {
+background: rgba(88, 101, 242, 0.2);
+padding: 1rem;
+border-radius: 8px;
+text-align: center;
+border: 1px solid rgba(88, 101, 242, 0.3);
+transition: all 0.3s ease;
+        }
+
+.discord-stat:hover {
+background: rgba(88, 101, 242, 0.3);
+transform: translateY(-5px);
+        }
+
+.discord-stat-number {
+font-size: 2rem;
+font-weight: bold;
+color: #5865f2;
+        }
+
+.discord-stat-label {
+color: #cccccc;
+margin-top: 0.5rem;
+        }
+
+/* Team Section erweitert */
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+    .team-category {
+        margin-bottom: 1.25rem;
+    }
+
+    .team-category-title {
+        color: #5a8a4a;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.9rem;
+        border-bottom: 2px solid #5a8a4a;
+        padding-bottom: 0.35rem;
+    }
+
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 0.9rem;
+        margin-top: 1.25rem;
+    }
+
+    .team-member {
+        background: linear-gradient(135deg, rgba(45, 60, 50, 0.9) 0%, rgba(30, 40, 35, 0.9) 100%);
+        border: 1px solid #5a8a4a;
+        border-radius: 8px;
+        padding: 0.7rem;
+        text-align: center;
+        transition: all 0.25s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+        backdrop-filter: blur(6px);
+        font-size: 0.95rem;
+        min-height: 88px;
+    }
+
+    .team-member::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(90, 138, 74, 0.06), transparent);
+        transition: left 0.4s;
+        z-index: 0;
+    }
+
+    .team-member:hover::before {
+        left: 100%;
+    }
+
+    .team-member:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(90, 138, 74, 0.22);
+        border-color: #6a9a5a;
+    }
+
+    .team-avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        border: 2px solid #5a8a4a;
+        background: linear-gradient(45deg, #4a6b3a, #5a8a4a);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        margin: 0 auto 0.5rem;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 0 10px rgba(90, 138, 74, 0.18);
+        overflow: hidden;
+    }
+
+    .team-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    /* Status-Punkt ausblenden (grüner Punkt entfernen) */
+    .team-status {
+        display: none !important;
+    }
+
+    .team-name {
+        color: #c8d4c8;
+        font-size: 1rem;
+        font-weight: 800;
+        margin-bottom: 0.15rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .team-username {
+        color: #90a890;
+        font-size: 0.75rem;
+        margin-bottom: 0.3rem;
+        position: relative;
+        z-index: 1;
+        font-style: italic;
+    }
+
+    .team-role {
+        display: inline-block;
+        color: #ffffff;
+        background: linear-gradient(135deg, #5a8a4a 0%, #6a9a5a 100%);
+        padding: 0.25rem 0.5rem;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 0.72rem;
+        margin-bottom: 0.3rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .team-roles {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        margin-bottom: 0.35rem;
+        position: relative;
+        z-index: 1;
+        justify-content: center;
+    }
+
+    .team-tag {
+        display: inline-block;
+        color: #ffffff;
+        padding: 0.22rem 0.5rem;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 0.7rem;
+    }
+
+    /* Unterschiedliche Farben pro Abteilung */
+    .team-tag.owner { background: linear-gradient(135deg, #b58900 0%, #f6c26b 100%); color: #1a1200; }
+    .team-tag.admin { background: linear-gradient(135deg, #dc2626 0%, #ff7b7b 100%); }
+    .team-tag.moderator { background: linear-gradient(135deg, #7c3aed 0%, #b695ff 100%); }
+    .team-tag.developer { background: linear-gradient(135deg, #2563eb 0%, #7fb3ff 100%); }
+    .team-tag.supporter { background: linear-gradient(135deg, #059669 0%, #6fe0a8 100%); color: #052814; }
+    .team-tag.eventmanagement { background: linear-gradient(135deg, #db2777 0%, #ff8fcf 100%); }
+    .team-tag.team { background: linear-gradient(135deg, #5a8a4a 0%, #6a9a5a 100%); }
+
+    .team-description {
+        display: none; /* ausblenden, spart Platz und macht Karten kompakter */
+    }
+
+    .team-since {
+        color: #90a890;
+        font-size: 0.78rem;
+        position: relative;
+        z-index: 1;
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(90, 138, 74, 0.12);
+    }
+
+    .team-socials {
+        display: flex;
+        justify-content: center;
+        gap: 0.4rem;
+        margin-top: 0.45rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .team-social-link {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: rgba(90, 138, 74, 0.12);
+        border: 1px solid #5a8a4a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #c8d4c8;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        font-size: 0.85rem;
+    }
+
+    .team-social-link:hover {
+        background: #5a8a4a;
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 0 4px 12px rgba(90, 138, 74, 0.22);
+    }
+
+/* Social Links erweitert */
+.social-section {
+background: linear-gradient(135deg, rgba(45, 60, 50, 0.9) 0%, rgba(30, 40, 35, 0.9) 100%);
+border: 2px solid #5a8a4a;
+border-radius: 8px;
+padding: 2rem;
+text-align: center;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+.social-links {
+display: flex;
+justify-content: center;
+gap: 2rem;
+flex-wrap: wrap;
+margin-top: 2rem;
+        }
+
+.social-link {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 0.5rem;
+padding: 1.5rem;
+background: rgba(50, 70, 55, 0.3);
+border: 2px solid #5a8a4a;
+border-radius: 8px;
+text-decoration: none;
+color: #c8d4c8;
+transition: all 0.3s ease;
+min-width: 120px;
+position: relative;
+overflow: hidden;
+        }
+
+.social-link:hover {
+background: rgba(80, 110, 70, 0.4);
+border-color: #6a9a5a;
+transform: translateY(-8px) scale(1.05);
+box-shadow: 0 15px 35px rgba(90, 138, 74, 0.3);
+        }
+
+.discord-link {
+background: rgba(88, 101, 242, 0.2);
+border-color: #5865f2;
+        }
+
+.discord-link:hover {
+background: rgba(88, 101, 242, 0.3);
+border-color: #7289da;
+box-shadow: 0 15px 35px rgba(88, 101, 242, 0.3);
+        }
+
+.social-icon {
+font-size: 2.5rem;
+margin-bottom: 0.5rem;
+filter: none;
+        }
+
+.social-name {
+font-weight: 600;
+font-size: 1.1rem;
+        }
+
+/* Modal Styles erweitert */
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.9);
+z-index: 1000;
+justify-content: center;
+align-items: center;
+backdrop-filter: blur(5px);
+        }
+
+.modal.active {
+display: flex;
+animation: modalFadeIn 0.4s ease;
+        }
+
+@keyframes modalFadeIn {
+from {
+opacity: 0;
+backdrop-filter: blur(0px);
+            }
+to {
+opacity: 1;
+backdrop-filter: blur(5px);
+            }
+        }
+
+.modal-content {
+background: linear-gradient(135deg, rgba(45, 60, 50, 0.98) 0%, rgba(30, 40, 35, 0.98) 100%);
+padding: 3rem;
+border-radius: 8px;
+border: 3px solid #5a8a4a;
+box-shadow: 0 15px 50px rgba(70, 95, 60, 0.4);
+max-width: 500px;
+width: 90%;
+backdrop-filter: blur(10px);
+position: relative;
+overflow: hidden;
+animation: modalSlideIn 0.4s ease;
+        }
+
+@keyframes modalSlideIn {
+from {
+transform: translateY(-50px) scale(0.9);
+opacity: 0;
+            }
+to {
+transform: translateY(0) scale(1);
+opacity: 1;
+            }
+        }
+
+.modal-content h2 {
+color: #c8d4c8;
+margin-bottom: 2rem;
+text-align: center;
+font-size: 2rem;
+position: relative;
+z-index: 1;
+        }
+
+.form-group {
+margin-bottom: 1.5rem;
+position: relative;
+z-index: 1;
+        }
+
+.form-group label {
+display: block;
+color: #c8d4c8;
+margin-bottom: 0.5rem;
+font-weight: 600;
+        }
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+width: 100%;
+padding: 0.8rem;
+background: rgba(25, 25, 25, 0.9);
+border: 2px solid #4a6b3a;
+border-radius: 4px;
+color: #ffffff;
+font-size: 1rem;
+font-family: inherit;
+transition: all 0.3s ease;
+        }
+
+.form-group textarea {
+min-height: 100px;
+resize: vertical;
+        }
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+outline: none;
+border-color: #5a8a4a;
+box-shadow: 0 0 15px rgba(80, 100, 70, 0.3);
+background: rgba(25, 25, 25, 1);
+        }
+
+.form-buttons {
+display: flex;
+gap: 1rem;
+margin-top: 2rem;
+position: relative;
+z-index: 1;
+        }
+
+.form-buttons button {
+flex: 1;
+padding: 1rem;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-weight: 700;
+text-transform: uppercase;
+transition: all 0.3s ease;
+position: relative;
+overflow: hidden;
+        }
+
+.btn-submit {
+background: linear-gradient(135deg, #4a6b3a 0%, #5a8a4a 100%);
+color: #e8f4e8;
+        }
+
+.btn-cancel {
+background: #333333;
+color: #ffffff;
+border: 2px solid #666666;
+        }
+
+.btn-submit:hover, .btn-cancel:hover {
+transform: translateY(-3px);
+box-shadow: 0 6px 20px rgba(70, 95, 60, 0.4);
+        }
+
+.error-message {
+color: #DC143C;
+text-align: center;
+margin-top: 1rem;
+display: none;
+position: relative;
+z-index: 1;
+        }
+
+.form-row {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 1rem;
+margin-bottom: 1rem;
+        }
+
+/* Footer Styles */
+.footer {
+background: linear-gradient(135deg, rgba(50, 70, 55, 0.95) 0%, rgba(30, 40, 35, 0.95) 100%);
+border-top: 3px solid #5a8a4a;
+padding: 3rem 2rem 2rem;
+margin-top: 4rem;
+position: relative;
+overflow: hidden;
+        }
+
+.footer::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 2px;
+background: linear-gradient(90deg, transparent, #5a8a4a, transparent);
+        }
+
+.footer-content {
+max-width: 1400px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+gap: 3rem;
+        }
+
+.footer-section h3 {
+color: #c8d4c8;
+font-size: 1.5rem;
+margin-bottom: 1.5rem;
+border-bottom: 2px solid #4a6b3a;
+padding-bottom: 0.5rem;
+        }
+
+.footer-section p,
+.footer-section li {
+color: #cccccc;
+line-height: 1.6;
+margin-bottom: 0.5rem;
+        }
+
+.footer-section ul {
+list-style: none;
+        }
+
+.footer-section a {
+color: #5a8a4a;
+text-decoration: none;
+transition: color 0.3s ease;
+        }
+
+.footer-section a:hover {
+color: #c8d4c8;
+        }
+
+.footer-bottom {
+text-align: center;
+margin-top: 2rem;
+padding-top: 2rem;
+border-top: 1px solid rgba(80, 100, 70, 0.3);
+color: #5a8a4a;
+        }
+
+.impressum-section {
+background: linear-gradient(135deg, rgba(45, 60, 50, 0.9) 0%, rgba(30, 40, 35, 0.9) 100%);
+border: 2px solid #5a8a4a;
+border-radius: 8px;
+padding: 2rem;
+margin-bottom: 2rem;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+.impressum-section h2 {
+color: #c8d4c8;
+font-size: 2rem;
+margin-bottom: 2rem;
+border-bottom: 3px solid #4a6b3a;
+padding-bottom: 1rem;
+        }
+
+.impressum-section h3 {
+color: #5a8a4a;
+font-size: 1.3rem;
+margin: 1.5rem 0 1rem 0;
+        }
+
+.impressum-section p {
+color: #cccccc;
+line-height: 1.6;
+margin-bottom: 1rem;
+        }
+
+.impressum-section strong {
+color: #c8d4c8;
+        }
+
+/* Responsive Design erweitert */
+@media (max-width: 768px) {
+.timeline::before {
+left: 20px;
+            }
+
+.timeline-item {
+flex-direction: column !important;
+            }
+
+.timeline-content {
+width: calc(100% - 60px);
+margin-left: 60px;
+            }
+
+.timeline-marker {
+left: 20px;
+            }
+
+.login-btn {
+position: static;
+margin: 1rem auto;
+display: block;
+width: fit-content;
+            }
+
+.logo h1 {
+font-size: 2.5rem;
+            }
+
+.social-links {
+gap: 1rem;
+            }
+
+.team-grid {
+grid-template-columns: 1fr;
+            }
+
+.nav-tabs {
+gap: 0.5rem;
+            }
+
+.tab-btn {
+padding: 0.8rem 1.5rem;
+font-size: 1rem;
+            }
+
+.events-timeline::before {
+left: 20px;
+            }
+
+.event-item {
+flex-direction: column !important;
+            }
+
+.event-content {
+width: calc(100% - 60px);
+margin-left: 60px;
+            }
+
+.event-marker {
+left: 20px;
+            }
+
+.footer-content {
+grid-template-columns: 1fr;
+gap: 2rem;
+            }
+        }
+
+@media (max-width: 480px) {
+.container {
+padding: 0 1rem;
+            }
+
+.header {
+padding: 1rem;
+            }
+
+.logo h1 {
+font-size: 2rem;
+flex-direction: column;
+gap: 0.5rem;
+            }
+
+.modal-content {
+padding: 2rem;
+margin: 1rem;
+            }
+
+.form-buttons {
+flex-direction: column;
+            }
+
+.footer {
+padding: 2rem 1rem 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Matrix Background -->
+    <div class="matrix-bg" id="matrixBg"></div>
+
+    <!-- Erweiterte Partikel -->
+    <div class="particles" id="particles"></div>
+
+    <div class="tank-bg">
+        <div class="tank-silhouette tank1"></div>
+        <div class="tank-silhouette tank2"></div>
+        <div class="tank-silhouette tank3"></div>
+    </div>
+
+    <div class="header">
+        <div class="logo">
+            <h1>DPC</h1>
+            <p>Bundeswehr Community</p>
+        </div>
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('announcements', event)">📢 Infos</button>
+            <button class="tab-btn" onclick="showTab('roadmap', event)">🛣️ Roadmap</button>
+            <button class="tab-btn" onclick="showTab('team', event)">👥 Team</button>
+            <button class="tab-btn" onclick="showTab('discord', event)">💬 Discord</button>
+            <button class="tab-btn" onclick="showTab('social', event)">🌐 Social</button>
+            <button class="tab-btn" onclick="showTab('gallery', event)">🖼️ Galerie</button>
+            <button class="tab-btn" onclick="showTab('impressum', event)">📋 Impressum</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Ankündigungen Section -->
+        <div id="announcements" class="content-section active">
+            <div class="section-header">
+                <h2 style="color: #D2B48C;">Alle Informationen</h2>
+            </div>
+            <div class="announcements-grid" id="announcementsGrid">
+                <div class="announcement-card">
+                    <button class="delete-btn" onclick="deleteAnnouncement(this)">❌</button>
+                    <h3>🎯 Willkommen bei DPC!</h3>
+                    <div class="date">30. Oktober 2025</div>
+                    <p>Herzlich willkommen bei der Bundeswehr Community! Wir sind ein aktiver Clan mit Fokus auf Teamplay und gemeinsamen Spaß am Spiel.</p>
+                </div>
+                <div class="announcement-card">
+                    <button class="delete-btn" onclick="deleteAnnouncement(this)">❌</button>
+                    <h3>⚔️ Community Event</h3>
+                    <div class="date">28. Oktober 2025</div>
+                    <p>Nächstes Wochenende findet unser großes Community Event statt! Alle Mitglieder sind eingeladen, gemeinsam zu trainieren und zu spielen. Anmeldung im Discord!</p>
+                </div>
+                <div class="announcement-card">
+                    <button class="delete-btn" onclick="deleteAnnouncement(this)">❌</button>
+                    <h3>🏆 Turnierplanung</h3>
+                    <div class="date">25. Oktober 2025</div>
+                    <p>Wir planen die Teilnahme am großen EU-Turnier im November. Training beginnt diese Woche - jeder ist willkommen!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Roadmap Section -->
+        <div id="roadmap" class="content-section">
+            <div class="section-header">
+                <h2 style="color: #c8d4c8;">Unsere Geschichte</h2>
+                <button class="add-btn" id="addRoadmapBtn" onclick="showAddRoadmap()">➕ Neuer Meilenstein</button>
+            </div>
+            <div class="timeline" id="timelineContainer">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <button class="delete-btn" onclick="deleteRoadmapItem(this)">❌</button>
+                        <div class="year">2025 - Heute</div>
+                        <h3>Starkes Wachstum</h3>
+                        <p>DPC ist jetzt eine etablierte Community mit vielen aktiven Mitgliedern. Wir trainieren regelmäßig und schaffen ein großartiges Umfeld für alle Spieler.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <button class="delete-btn" onclick="deleteRoadmapItem(this)">❌</button>
+                        <div class="year">2024</div>
+                        <h3>Erster Große Erfolg</h3>
+                        <p>Unser Clan erreichte sein erstes großes Ziel! Dies markierte einen Wendepunkt in unserer Geschichte und motivierte viele neue Spieler, sich uns anzuschließen.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <button class="delete-btn" onclick="deleteRoadmapItem(this)">❌</button>
+                        <div class="year">2023</div>
+                        <h3>Durchbruch</h3>
+                        <p>Wir starteten erfolgreich und verbesserten kontinuierlich unser Teamplay durch regelmäßige Trainingseinheiten. Die Community wuchs stetig.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <button class="delete-btn" onclick="deleteRoadmapItem(this)">❌</button>
+                        <div class="year">2021</div>
+                        <h3>Die Gründung</h3>
+                        <p>Eine Gruppe passionierter Gamer beschloss, die Bundeswehr Community zu gründen. Mit dem Ziel, eine freundliche und kompetitive Umgebung zu schaffen.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Discord Section -->
+        <div id="discord" class="content-section">
+            <div class="section-header">
+                <h2 style="color: #c8d4c8;">Discord Community</h2>
+            </div>
+            <div class="discord-section">
+                <div class="discord-header">
+                    <div class="discord-icon">💬</div>
+                    <div>
+                        <h3 style="color: #5865f2; margin-bottom: 0.5rem;">Tritt unserem Discord bei!</h3>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="https://discord.gg/AdDzVvvv" target="_blank" style="
+                        display: inline-block;
+                        background: linear-gradient(135deg, #5865f2 0%, #7289da 100%);
+                        color: white;
+                        padding: 1rem 2rem;
+                        border-radius: 4px;
+                        text-decoration: none;
+                        font-weight: bold;
+                        transition: all 0.3s ease;
+                    " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(88, 101, 242, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        🚀 Discord beitreten
+                    </a>
+                </div>
+                <div style="display:flex;justify-content:center;">
+                    <div class="discord-widget" style="max-width:520px;width:100%;border:1px solid rgba(255,255,255,0.06);border-radius:10px;overflow:hidden;padding:6px;background:rgba(0,0,0,0.35);box-shadow:0 8px 30px rgba(0,0,0,0.5);">
+                        <iframe src="https://discord.com/widget?id=1403811268892295338&theme=dark"
+                            width="500" height="650" allowtransparency="true" frameborder="0"
+                            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                            style="display:block;border:0;background:transparent;">
+                        </iframe>
+                    </div>
+               </div>
+            </div>
+        </div>
+
+        <!-- Social Section -->
+        <div id="social" class="content-section">
+            <div class="section-header">
+                <h2 style="color: #c8d4c8;">Social Media Links</h2>
+            </div>
+            <div class="social-section">
+                <h3 style="color: #c8d4c8; margin-bottom: 1rem; font-size: 1.8rem;">Bleibt auf dem laufendem um nichts zu verpassen</h3>
+                <p style="color: #cccccc; margin-bottom: 2rem; line-height: 1.6;">
+                    Verpasse keine Updates, Events oder Community-Highlights! Folge der Bundeswehr Community auf unseren Social Media Kanälen.
+                </p>
+                <div class="social-links">
+                    <a href="https://discord.gg/AdDzVvvv" target="_blank" class="social-link discord-link">
+                        <div class="social-icon">💬</div>
+                        <div class="social-name">Discord</div>
+                    </a>
+                   <a href="https://www.youtube.com/@DeutschePanzerCommunity" target="_blank" class="social-link">
+                        <div class="social-icon">📺</div>
+                        <div class="social-name">YouTube</div>
+                    </a>
+                    <a href="https://www.twitch.tv/dpc_community" target="_blank" class="social-link">
+                        <div class="social-icon">🎮</div>
+                        <div class="social-name">Twitch</div>
+                    </a>
+                    <a href="https://www.instagram.com/deutsche_panzer_community/" target="_blank" class="social-link">
+                        <div class="social-icon">📸</div>
+                        <div class="social-name">Instagram</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <div id="team" class="content-section">
+            <div class="section-header">
+                <h2 style="color: #c8d4c8;">👥 Unser Team</h2>
+                <p style="color: #90a890; margin-top: 0.5rem;">Erfahrene und leidenschaftliche Gamer, die diese Community aufgebaut haben</p>
+            </div>
+            <div id="teamContainer">
+                <!-- Statische Team-Karten (vereinfacht) -->
+                <div id="teamGrid" class="team-grid">
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="https://cdn.discordapp.com/avatars/1194366378942148610/c39c56f2f1040ed584915f94adc8708e.png?size=256" alt="Zuko" onerror="this.src='https://ui-avatars.com/api/?name=Zuko&background=5a8a4a&color=fff&size=512'">
+                        </div>
+                        <h3 class="team-name">Zuko</h3>
+                        <p class="team-username">@zuko0286</p>
+                        <div class="team-roles"><span class="team-tag owner">Owner</span></div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="https://cdn.discordapp.com/avatars/1403807211792109661/848bbb1eb8ab7267e3a433a46d5f09af.png?size=256" alt="Kriegsgott" onerror="this.src='https://ui-avatars.com/api/?name=Kriegsgott&background=5a8a4a&color=fff&size=512'">
+                        </div>
+                        <h3 class="team-name">Kriegsgott</h3>
+                        <p class="team-username">@kriegsgott</p>
+                        <div class="team-roles"><span class="team-tag owner">Owner</span></div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="https://cdn.discordapp.com/avatars/1282333186776498269/0aa7365f57477a520ab1a5937f81085e.png?size=256" alt="Perry" onerror="this.src='https://ui-avatars.com/api/?name=Perry&background=5a8a4a&color=fff&size=512'">
+                        </div>
+                        <h3 class="team-name">Perry</h3>
+                        <p class="team-username">@perry_dev</p>
+                        <div class="team-roles"><span class="team-tag developer">Development</span></div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="https://cdn.discordapp.com/avatars/341015855280291842/716358dbba93020d47d889c89a78cecb.png?size=256" alt="Dadel" onerror="this.src='https://ui-avatars.com/api/?name=Dadel&background=5a8a4a&color=fff&size=512'">
+                        </div>
+                        <h3 class="team-name">Dadel</h3>
+                        <p class="team-username">@dadel_sup</p>
+                        <div class="team-roles"><span class="team-tag supporter">Support</span></div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="https://cdn.discordapp.com/avatars/1127557972546039808/c77854cdd7b1662f040f4580392396b6.png?size=256" alt="Luca" onerror="this.src='https://ui-avatars.com/api/?name=Luca&background=5a8a4a&color=fff&size=512'">
+                        </div>
+                        <h3 class="team-name">Luca</h3>
+                        <p class="team-username">@luca_events</p>
+                        <div class="team-roles"><span class="team-tag eventmanagement">Eventmanagement</span></div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="https://cdn.discordapp.com/avatars/968500320890142780/5a058f014e12948ac678b81cff0ee85a.png?size=256" alt="Zocker" onerror="this.src='https://ui-avatars.com/api/?name=Zocker&background=5a8a4a&color=fff&size=512'">
+                        </div>
+                        <h3 class="team-name">Zocker</h3>
+                        <p class="team-username">@zocker_events</p>
+                        <div class="team-roles"><span class="team-tag eventmanagement">Eventmanagement</span></div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="https://cdn.discordapp.com/avatars/1351946561889763459/b65d1b8b221d3277b0b15191cba97d19.png?size=256" alt="Sven" onerror="this.src='https://ui-avatars.com/api/?name=Sven&background=5a8a4a&color=fff&size=512'">
+                        </div>
+                        <h3 class="team-name">Sven</h3>
+                        <p class="team-username">@sven_team</p>
+                        <div class="team-roles"><span class="team-tag team">Team</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Impressum Section -->
+        <div id="impressum" class="content-section">
+            <div class="impressum-section">
+                <h2>📋 Impressum</h2>
+                
+                <p>
+                    <strong>Bundeswehr Community (DPC)</strong><br>
+                    Owner: Zuko<br>
+                    E-Mail:info@bundeswehr-community@gmail.com <br>
+                    Hinweis: Diese Website dient rein zur Freizeit es wird kein gelddadurch eingenommen!<br>
+                    
+                </p>
+
+                <h3>Kontakt</h3>
+                <p>
+                    <strong>E-Mail:</strong> info.bundeswehr-community.de<br>
+                    <strong>Discord:</strong> <a href="https://discord.gg/AdDzVvvv" target="_blank">https://discord.gg/AdDzVvvv</a>
+                </p>
+
+                <h3>Haftungsausschluss</h3>
+                <p>
+                    <strong>Haftung für Inhalte:</strong><br>
+                    Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht unter der Verpflichtung, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+                </p>
+                <p>
+                    Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+                </p>
+
+                <p>
+                    <strong>Haftung für Links:</strong><br>
+                    Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
+                </p>
+
+                <h3>Urheberrecht</h3>
+                <p>
+                    Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
+                </p>
+
+                <h3>Datenschutz</h3>
+                <p>
+                    Die Nutzung unserer Website ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder E-Mail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.
+                </p>
+                <p>
+                    Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.
+                </p>
+
+                <h3>Discord Integration</h3>
+                <p>
+                    Diese Website nutzt Discord-Widgets zur Anzeige von Community-Informationen. Beim Laden dieser Widgets werden Daten an Discord übertragen. Weitere Informationen finden Sie in der Datenschutzerklärung von Discord: <a href="https://discord.com/privacy" target="_blank">https://discord.com/privacy</a>
+                </p>
+
+                <h3>World of Tanks</h3>
+                <p>
+                    Diese Community-Website steht in keiner offiziellen Verbindung zu Wargaming oder World of Tanks. World of Tanks ist ein Markenzeichen der Wargaming.net. Alle Rechte vorbehalten.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🛡️ Bundeswehr Community</h3>
+                <p>Die führende deutsche Gaming Community mit aktiven Mitgliedern. Seit 2021 vereinen wir Gamer und Enthusiasten aus ganz Deutschland.</p>
+                <p><strong>Gegründet:</strong> 2021</p>
+                <p><strong>Fokus:</strong> Teamplay & Spaß</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>📞 Kontakt & Support</h3>
+                <p><strong>E-Mail:</strong> info.bundeswehr-community@gmail.com</p>
+                <p><strong>Discord:</strong> <a href="https://discord.gg/AdDzVvvv" target="_blank">discord.gg/AdDzVvvv</a></p>
+                <p><strong>Support-Zeiten:</strong> Täglich 18:00 - 22:00 Uhr</p>
+                <p><strong>Sprache:</strong> Deutsch</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Bundeswehr Community (DPC). Alle Rechte vorbehalten.</p>
+            <p>Diese Website ist eine inoffizielle Community-Seite.</p>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script>
+        // Verschlüsselte Credentials (Base64 kodiert)
+        const credentials = {
+            u: btoa('Owner'),
+            p: btoa('admin')
+        };
+        let isLoggedIn = false;
+
+        // Discord Configuration
+        function getDiscordConfig() {
+            return window.DISCORD_CONFIG || {
+                guildId: '1403811268892295338',
+                botToken: '',
+                apiBaseUrl: 'https://discord.com/api/v10'
+            };
+        }
+
+        // Discord User IDs für Team-Member
+        const teamMemberIds = {
+            'Zuko': '1194366378942148610'
+        };
+
+        // Discord API Helper
+        const discordAPI = {
+            async getGuildMembers() {
+                const discordConfig = getDiscordConfig();
+                console.log('📡 Starte Discord API Anfrage mit Config:', {
+                    guildId: discordConfig.guildId,
+                    hasToken: !!discordConfig.botToken
+                });
+                
+                if (!discordConfig.botToken) {
+                    console.log('⚠️ Discord Bot Token nicht gesetzt - verwende lokale Daten');
+                    return null;
+                }
+
+                try {
+                    const url = `${discordConfig.apiBaseUrl}/guilds/${discordConfig.guildId}/members?limit=100`;
+                    console.log('🔗 API URL:', url);
+                    
+                    const response = await fetch(
+                        url,
+                        {
+                            headers: {
+                                'Authorization': `Bot ${discordConfig.botToken}`,
+                                'Content-Type': 'application/json'
+                            }
+                        }
+                    );
+
+                    console.log('📊 API Response Status:', response.status);
+                    
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error('❌ Discord API Fehler:', response.status, errorText);
+                        return null;
+                    }
+
+                    const data = await response.json();
+                    console.log('✅ Discord Mitglieder geladen:', data.length);
+                    return data;
+                } catch (error) {
+                    console.error('❌ Discord API Fehler:', error.message, error);
+                    return null;
+                }
+            },
+
+            getAvatarUrl(userId, avatarHash) {
+                if (!avatarHash) {
+                    return `https://cdn.discordapp.com/embed/avatars/${userId % 5}.png`;
+                }
+                return `https://cdn.discordapp.com/avatars/${userId}/${avatarHash}.png?size=512`;
+            }
+        };
+
+        // Matrix-Effekt erstellen
+        function createMatrixEffect() {
+            const matrixBg = document.getElementById('matrixBg');
+            const chars = '01ABCDEFGHIJKLMNOPQRSTUVWXYZ🛡️⚔️🎯';
+            for (let i = 0; i < 50; i++) {
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.textContent = chars[Math.floor(Math.random() * chars.length)];
+                char.style.left = Math.random() * 100 + '%';
+                char.style.animationDelay = Math.random() * 8 + 's';
+                char.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                matrixBg.appendChild(char);
+            }
+        }
+
+        // Erweiterte Partikel Animation
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 100;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                const types = ['rust', 'metal', 'spark'];
+                const type = types[Math.floor(Math.random() * types.length)];
+                particle.className = `particle ${type}`;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 15 + 15) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Discord Stats Animation
+        function animateDiscordStats() {
+            const memberCount = document.getElementById('memberCount');
+            const onlineCount = document.getElementById('onlineCount');
+            setInterval(() => {
+                const members = 145 + Math.floor(Math.random() * 20);
+                const online = 50 + Math.floor(Math.random() * 30);
+                if (memberCount) memberCount.textContent = members;
+                if (onlineCount) onlineCount.textContent = online;
+            }, 15000);
+        }
+
+        // Team Daten laden und rendern - ohne Kategorisierung, mit Tags
+        function loadTeamMembers() {
+            const teamData = getDefaultTeamData();
+            const teamContainer = document.getElementById('teamContainer');
+            if (!teamContainer) return;
+            // Wenn statische HTML-Karten vorhanden sind, nichts tun
+            if (document.getElementById('teamGrid')) return;
+
+            // Render HTML mit allen Mitgliedern und ihren Tags
+            let html = '<div class="team-grid">';
+            
+            teamData.forEach(member => {
+                html += `
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="${member.avatar}" alt="${member.name}" onerror="this.src='${member.fallbackAvatar}'">
+                            <div class="team-status ${member.status}"></div>
+                        </div>
+                        <h3 class="team-name">${member.name}</h3>
+                        <p class="team-username">${member.username}</p>
+                        <div class="team-roles">
+                            ${member.categories.map(cat => `<span class="team-tag ${cat.toLowerCase().replace(' ', '')}">${cat}</span>`).join('')}
+                        </div>
+                        <p class="team-description">${member.description}</p>
+                        <div class="team-since">🕐 ${member.since}</div>
+                        <div class="team-socials">
+                            ${member.socials.map(social => `
+                                <a href="${social.url}" class="team-social-link" title="${social.label}">
+                                    ${social.icon}
+                                </a>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            teamContainer.innerHTML = html;
+        }
+
+        // (Alt) Funktion getDiscordAvatarUrl entfernt — verwende stattdessen discordAPI.getAvatarUrl(userId, avatarHash)
+
+        // Discord-Daten in Team-Format konvertieren
+        async function buildTeamFromDiscord(members) {
+            const roleMapping = {
+                'Admin': { role: 'admin', label: 'Administrator', icon: '👑' },
+                'Moderator': { role: 'moderator', label: 'Moderator', icon: '🛡️' },
+                'Developer': { role: 'developer', label: 'Entwickler', icon: '👨‍💻' },
+                'Support': { role: 'support', label: 'Support', icon: '📞' },
+                'Team': { role: 'support', label: 'Team', icon: '👥' }
+            };
+
+            return members
+                .filter(m => m.nick || m.user.username) // Nur Nutzer mit Infos
+                .slice(0, 10) // Limit auf 10 Members
+                .map(member => {
+                    const user = member.user;
+                    const displayName = member.nick || user.global_name || user.username;
+                    
+                    // Rolle bestimmen basierend auf Discord-Rollen
+                    let roleInfo = roleMapping['Team']; // Default
+                    if (member.roles && member.roles.length > 0) {
+                        const role = Object.keys(roleMapping).find(r => 
+                            member.roles.some(rId => rId.includes(r))
+                        );
+                        if (role) roleInfo = roleMapping[role];
+                    }
+
+                    return {
+                        name: displayName,
+                        username: `@${user.username}#${user.discriminator || '0000'}`,
+                        role: roleInfo.role,
+                        roleLabel: roleInfo.label,
+                        description: `Discord Mitglied - ${roleInfo.icon} ${roleInfo.label}`,
+                        avatar: discordAPI.getAvatarUrl(user.id, user.avatar),
+                        fallbackAvatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=5a8a4a&color=fff`,
+                        status: 'online',
+                        since: 'Discord Member',
+                        socials: [
+                            { icon: '🎮', url: '#', label: 'Gaming' }
+                        ]
+                    };
+                });
+        }
+
+        // Standard Demo-Daten
+        function getDefaultTeamData() {
+            return [
+                {
+                    name: 'Zuko',
+                    username: '@zuko0286',
+                    userId: '1194366378942148610',
+                    role: 'owner',
+                    roleLabel: 'Owner',
+                    categories: ['Owner'],
+                    description: 'Gründer und Projektleiter. Sorgt für Vision und Strategie.',
+                    avatar: 'https://cdn.discordapp.com/avatars/1194366378942148610/c39c56f2f1040ed584915f94adc8708e.png?size=256',
+                    fallbackAvatar: 'https://ui-avatars.com/api/?name=Zuko&background=5a8a4a&color=fff&size=512',
+                    status: 'online',
+                    since: 'seit 2021',
+                   
+                },
+                {
+                    name: 'Kriegsgott',
+                    username: '@kriegsgott',
+                    userId: '1403807211792109661',
+                    role: 'owner',
+                    roleLabel: 'Owner',
+                    categories: ['Owner'],
+                    description: 'Co-Gründer und strategischer Leiter. Gestaltet die Zukunft der Community.',
+                    avatar: 'https://cdn.discordapp.com/avatars/1403807211792109661/848bbb1eb8ab7267e3a433a46d5f09af.png?size=256',
+                    fallbackAvatar: 'https://ui-avatars.com/api/?name=Kriegsgott&background=5a8a4a&color=fff&size=512',
+                    status: 'online',
+                    since: 'seit 2021',
+                    socials: [
+                        { icon: '🎮', url: '#', label: 'Gaming' },
+                        { icon: '💻', url: '#', label: 'GitHub' }
+                    ]
+                },
+                {
+                    name: 'Perry',
+                    username: '@perry_dev',
+                    userId: '1282333186776498269',
+                    role: 'developer',
+                    roleLabel: 'Entwickler',
+                    categories: ['Developer'],
+                    description: 'Web- und Backend-Entwicklung. Treibt die technische Innovation voran.',
+                    avatar: 'https://cdn.discordapp.com/avatars/1282333186776498269/0aa7365f57477a520ab1a5937f81085e.png?size=256',
+                    fallbackAvatar: 'https://ui-avatars.com/api/?name=Perry&background=5a8a4a&color=fff&size=512',
+                    status: 'online',
+                    since: 'seit 2023',
+                   
+
+                },
+                {
+                    name: 'Dadel',
+                    username: '@dadel_sup',
+                    userId: '341015855280291842',
+                    role: 'support',
+                    roleLabel: 'Support',
+                    categories: ['Supporter', 'Team'],
+                    description: 'Customer Support und Community Care. Deine erste Anlaufstelle bei Fragen.',
+                    avatar: 'https://cdn.discordapp.com/avatars/341015855280291842/716358dbba93020d47d889c89a78cecb.png?size=256',
+                    fallbackAvatar: 'https://ui-avatars.com/api/?name=Dadel&background=5a8a4a&color=fff&size=512',
+                    status: 'online',
+                    since: 'seit 2023',
+                   
+                },
+                {
+                    name: 'Luca',
+                    username: '@luca_events',
+                    userId: '1127557972546039808',
+                    role: 'event',
+                    roleLabel: 'Event Manager',
+                    categories: ['Eventmanagement', 'Team'],
+                    description: 'Organisiert Events und Community-Aktivitäten mit Leidenschaft.',
+                    avatar: 'https://cdn.discordapp.com/avatars/1127557972546039808/c77854cdd7b1662f040f4580392396b6.png?size=256',
+                    fallbackAvatar: 'https://ui-avatars.com/api/?name=Luca&background=5a8a4a&color=fff&size=512',
+                    status: 'online',
+                    since: 'seit 2023',
+                    
+                },
+                {
+                    name: 'Zocker',
+                    username: '@zocker_events',
+                    userId: '968500320890142780',
+                    role: 'event',
+                    roleLabel: 'Event Manager',
+                    categories: ['Eventmanagement', 'Team'],
+                    description: 'Organisiert spannende Events und Community-Treffen.',
+                    avatar: 'https://cdn.discordapp.com/avatars/968500320890142780/5a058f014e12948ac678b81cff0ee85a.png?size=256',
+                    fallbackAvatar: 'https://ui-avatars.com/api/?name=Zocker&background=5a8a4a&color=fff&size=512',
+                    status: 'online',
+                    since: 'seit 2023',
+                   
+                },
+                {
+                    name: 'Sven',
+                    username: '@sven_team',
+                    userId: '1351946561889763459',
+                    role: 'team',
+                    roleLabel: 'Team Member',
+                    categories: ['Team'],
+                    description: 'Aktives Mitglied des Teams und zuverlässiger Community Supporter.',
+                    avatar: 'https://cdn.discordapp.com/avatars/1351946561889763459/b65d1b8c221d3277b0b15191cba97d19.png?size=256',
+                    fallbackAvatar: 'https://ui-avatars.com/api/?name=Sven&background=5a8a4a&color=fff&size=512',
+                    status: 'online',
+                    since: 'seit 2024',
+                   
+                }
+            ];
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createMatrixEffect();
+            createParticles();
+            animateDiscordStats();
+                loadTeamMembers();
+                initGallery();
+        });
+
+        function showTab(tabName, ev) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const targetSection = document.getElementById(tabName);
+            if (targetSection) targetSection.classList.add('active');
+            const clicked = ev && ev.target ? ev.target : document.querySelector(`.tab-btn[onclick="showTab('${tabName}', event)"]`);
+            if (clicked) clicked.classList.add('active');
+        }
+
+        // --- Erweiterte Galerie / Lightbox Funktionen ---
+        const GALLERY_STORAGE_KEY = 'dpc_gallery_v1';
+
+        const defaultGallery = [
+            { src: 'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?w=1200&auto=format&fit=crop&q=80', title: 'Panzer im Sonnenuntergang', desc: 'Beispielbild 1', category: 'Fahrzeuge' },
+            { src: 'https://images.unsplash.com/photo-1508619821252-6c4a0b3c3f9f?w=1200&auto=format&fit=crop&q=80', title: 'Training', desc: 'Beispielbild 2', category: 'Events' },
+            { src: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&auto=format&fit=crop&q=80', title: 'Teamfoto', desc: 'Beispielbild 3', category: 'Team' },
+            { src: 'https://images.unsplash.com/photo-1508780709619-79562169bc64?w=1200&auto=format&fit=crop&q=80', title: 'Landschaft', desc: 'Beispielbild 4', category: 'Landschaften' },
+            { src: 'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=1200&auto=format&fit=crop&q=80', title: 'Ausrüstung', desc: 'Beispielbild 5', category: 'Ausrüstung' },
+            { src: 'https://images.unsplash.com/photo-1477949334231-3f5e9d9a4d5b?w=1200&auto=format&fit=crop&q=80', title: 'Strategie', desc: 'Beispielbild 6', category: 'Events' }
+        ];
+
+        let galleryData = loadGalleryFromStorage();
+        let currentGalleryIndex = 0;
+        let galleryRenderStart = 0;
+        const GALLERY_PAGE_SIZE = 6;
+
+        function loadGalleryFromStorage() {
+            try {
+                const raw = localStorage.getItem(GALLERY_STORAGE_KEY);
+                if (!raw) return defaultGallery.slice();
+                const parsed = JSON.parse(raw);
+                if (!Array.isArray(parsed) || parsed.length === 0) return defaultGallery.slice();
+                return parsed;
+            } catch (e) {
+                console.warn('Konnte Galerie aus localStorage nicht laden, verwende Default.', e);
+                return defaultGallery.slice();
+            }
+        }
+
+        function saveGalleryToStorage() {
+            try {
+                localStorage.setItem(GALLERY_STORAGE_KEY, JSON.stringify(galleryData));
+            } catch (e) {
+                console.warn('Speichern der Galerie fehlgeschlagen', e);
+            }
+        }
+
+        function initGallery() {
+            const galleryContainer = document.createElement('div');
+            galleryContainer.id = 'gallery';
+            galleryContainer.className = 'content-section';
+            galleryContainer.innerHTML = `
+                <div class="section-header">
+                    <h2 style="color: #c8d4c8;">Galerie</h2>
+                    <div style="display:flex;gap:0.75rem;align-items:center;">
+                        <input id="gallerySearch" placeholder="Suche..." style="padding:0.6rem;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.4);color:#fff;" oninput="renderGallery()" />
+                        <button id="addGalleryBtn" class="add-btn" style="display:none;" onclick="openAddImageModal()">➕ Bild hinzufügen</button>
+                    </div>
+                </div>
+                <div class="gallery-grid" id="galleryGrid"></div>
+                <div style="text-align:center;margin-top:1rem;"><button id="loadMoreBtn" class="add-btn">Mehr laden</button></div>
+
+                <div id="galleryLightbox" class="modal" aria-hidden="true">
+                    <div class="modal-content" style="max-width:900px;">
+                        <img id="lightboxImg" class="lightbox-image" src="" alt="" />
+                        <div style="margin-top:0.75rem;color:#c8d4c8;text-align:center;"><div id="lightboxTitle"></div><div id="lightboxDesc" style="color:#cccccc;font-size:0.95rem;margin-top:0.25rem"></div></div>
+                        <div class="lightbox-controls">
+                            <button class="lightbox-btn" onclick="prevImage()">◀️ Zurück</button>
+                            <button class="lightbox-btn" onclick="closeGallery()">✖️ Schließen</button>
+                            <button class="lightbox-btn" onclick="nextImage()">Vor ▶️</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="addImageModal" class="modal" aria-hidden="true">
+                    <div class="modal-content">
+                        <h2>Bild hinzufügen</h2>
+                        <form id="addImageForm">
+                            <div class="form-group">
+                                <label>Titel</label>
+                                <input id="imgTitle" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Beschreibung</label>
+                                <input id="imgDesc" />
+                            </div>
+                            <div class="form-group">
+                                <label>Kategorie</label>
+                                <input id="imgCategory" placeholder="z.B. Fahrzeuge" />
+                            </div>
+                            <div class="form-group">
+                                <label>Bilddatei (oder URL)</label>
+                                <input id="imgFile" type="file" accept="image/*" />
+                                <input id="imgUrl" placeholder="oder Bild-URL einfügen" style="margin-top:0.5rem;" />
+                            </div>
+                            <div class="form-buttons">
+                                <button type="submit" class="btn-submit">Hochladen</button>
+                                <button type="button" class="btn-cancel" onclick="closeAddImageModal()">Abbrechen</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+
+            // Insert gallery section before roadmap
+            const roadmapSection = document.getElementById('roadmap');
+            if (roadmapSection) roadmapSection.parentNode.insertBefore(galleryContainer, roadmapSection);
+
+            document.getElementById('loadMoreBtn').addEventListener('click', () => { renderGallery(false, false, true); });
+
+            renderGallery(true);
+
+            // keyboard navigation
+            window.addEventListener('keydown', (e) => {
+                const modal = document.getElementById('galleryLightbox');
+                if (!modal || !modal.classList.contains('active')) return;
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'Escape') closeGallery();
+            });
+
+            // handle add image form
+            document.getElementById('addImageForm').addEventListener('submit', handleAddImage);
+        }
+
+    
+
+        function renderGallery(resetSearch = true, setSearchValue = false, loadMore = false) {
+            const grid = document.getElementById('galleryGrid');
+            const search = document.getElementById('gallerySearch') ? document.getElementById('gallerySearch').value.toLowerCase() : '';
+            if (!grid) return;
+
+            let items = galleryData.filter(item => {
+                if (search && !(item.title.toLowerCase().includes(search) || (item.desc && item.desc.toLowerCase().includes(search)))) return false;
+                return true;
+            });
+
+            if (!loadMore) galleryRenderStart = 0;
+
+            const slice = items.slice(galleryRenderStart, galleryRenderStart + GALLERY_PAGE_SIZE);
+            if (!loadMore) grid.innerHTML = '';
+
+            slice.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = 'gallery-card gallery-item';
+                const globalIndex = galleryRenderStart + idx;
+                card.innerHTML = `
+                    <img src="${item.src}" alt="${escapeHtml(item.title)}" class="gallery-thumb" loading="lazy" onclick="openGallery(${globalIndex})" />
+                    <div class="card-overlay">
+                        <div class="gallery-info">
+                            <div class="gallery-title">${escapeHtml(item.title)}</div>
+                            <div class="gallery-desc">${escapeHtml(item.desc || '')}</div>
+                        </div>
+                        <div class="badge">${escapeHtml(item.category || '')}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            galleryRenderStart += slice.length;
+
+            // show/hide load more
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            loadMoreBtn.style.display = (galleryRenderStart < items.length) ? 'inline-block' : 'none';
+
+            // show add button for admins
+            const addBtn = document.getElementById('addGalleryBtn');
+            if (addBtn) addBtn.style.display = isLoggedIn ? 'inline-block' : 'none';
+        }
+
+        function escapeHtml(s){ return String(s||'').replace(/[&<>\"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c]; }); }
+
+        function openGallery(index) {
+            currentGalleryIndex = index || 0;
+            const img = document.getElementById('lightboxImg');
+            const title = document.getElementById('lightboxTitle');
+            const desc = document.getElementById('lightboxDesc');
+            const item = galleryData[currentGalleryIndex];
+            if (!item) return;
+            img.src = item.src;
+            title.textContent = item.title || '';
+            desc.textContent = item.desc || '';
+            document.getElementById('galleryLightbox').classList.add('active');
+        }
+
+        function closeGallery() {
+            const lb = document.getElementById('galleryLightbox');
+            const content = lb ? lb.querySelector('.modal-content') : null;
+            if (!lb) return;
+            lb.classList.add('closing');
+            if (content) content.classList.add('closing-content');
+            setTimeout(() => {
+                lb.classList.remove('active', 'closing');
+                if (content) content.classList.remove('closing-content');
+            }, 300);
+        }
+
+        function prevImage() {
+            const img = document.getElementById('lightboxImg');
+            img.classList.remove('fade-in');
+            img.classList.add('fade-out');
+            setTimeout(() => {
+                currentGalleryIndex = (currentGalleryIndex - 1 + galleryData.length) % galleryData.length;
+                updateLightboxImage();
+            }, 250);
+        }
+
+        function nextImage() {
+            const img = document.getElementById('lightboxImg');
+            img.classList.remove('fade-in');
+            img.classList.add('fade-out');
+            setTimeout(() => {
+                currentGalleryIndex = (currentGalleryIndex + 1) % galleryData.length;
+                updateLightboxImage();
+            }, 250);
+        }
+
+        function updateLightboxImage() {
+            const img = document.getElementById('lightboxImg');
+            const title = document.getElementById('lightboxTitle');
+            const desc = document.getElementById('lightboxDesc');
+            const item = galleryData[currentGalleryIndex];
+            if (!item) return;
+            img.src = item.src;
+            title.textContent = item.title || '';
+            desc.textContent = item.desc || '';
+            img.classList.remove('fade-out');
+            img.classList.add('fade-in');
+        }
+
+        // --- Add Image (Admin) ---
+        function openAddImageModal(){ document.getElementById('addImageModal').classList.add('active'); }
+        function closeAddImageModal(){ document.getElementById('addImageModal').classList.remove('active'); }
+
+        async function handleAddImage(e){
+            e.preventDefault();
+            const title = document.getElementById('imgTitle').value || 'Ohne Titel';
+            const desc = document.getElementById('imgDesc').value || '';
+            const category = document.getElementById('imgCategory').value || 'Uncategorized';
+            const fileInput = document.getElementById('imgFile');
+            const urlInput = document.getElementById('imgUrl').value.trim();
+
+            let src = '';
+            if (fileInput && fileInput.files && fileInput.files[0]){
+                const file = fileInput.files[0];
+                src = await readFileAsDataURL(file);
+            } else if (urlInput) {
+                src = urlInput;
+            } else {
+                alert('Bitte Datei auswählen oder eine Bild-URL angeben.');
+                return;
+            }
+
+            const newItem = { src, title, desc, category };
+            galleryData.unshift(newItem);
+            saveGalleryToStorage();
+            closeAddImageModal();
+            galleryRenderStart = 0;
+            renderGallery(true);
+            return false;
+        }
+
+        function readFileAsDataURL(file){
+            return new Promise((res, rej) => {
+                const fr = new FileReader();
+                fr.onload = () => res(fr.result);
+                fr.onerror = rej;
+                fr.readAsDataURL(file);
+            });
+        }
+
+        function showLogin() {
+            if (isLoggedIn) {
+                logout();
+                return;
+            }
+            document.getElementById('loginModal').classList.add('active');
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        function closeLogin() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (btoa(username) === credentials.u && btoa(password) === credentials.p) {
+                isLoggedIn = true;
+                closeLogin();
+                document.querySelector('.login-btn').textContent = '✅ Abmelden';
+                // Zeige Admin-Buttons
+                document.querySelectorAll('.add-btn').forEach(btn => btn.classList.add('visible'));
+                // Zeige Delete-Buttons
+                document.querySelectorAll('.delete-btn').forEach(btn => btn.classList.add('visible'));
+                // Zeige Admin Tab
+                const adminTab = document.querySelector('.admin-tab');
+                if (adminTab) adminTab.style.display = 'inline-block';
+            } else {
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+            return false;
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            document.querySelector('.login-btn').textContent = '⚙️ Admin';
+            // Verstecke Admin-Buttons
+            document.querySelectorAll('.add-btn').forEach(btn => btn.classList.remove('visible'));
+            // Verstecke Delete-Buttons
+            document.querySelectorAll('.delete-btn').forEach(btn => btn.classList.remove('visible'));
+            // Verstecke Admin Tab
+            const adminTab = document.querySelector('.admin-tab');
+            if (adminTab) adminTab.style.display = 'none';
+        }
+
+        // Admin Functions
+        function approveApplication(btn) {
+            const applicationItem = btn.closest('.application-item');
+            const name = applicationItem.querySelector('.application-name').textContent;
+            if (confirm(`Bewerbung von ${name} annehmen?`)) {
+                applicationItem.style.background = 'rgba(34, 139, 34, 0.2)';
+                applicationItem.style.borderColor = '#228B22';
+                btn.textContent = '✅ Angenommen';
+                btn.disabled = true;
+                btn.nextElementSibling.style.display = 'none';
+                setTimeout(() => {
+                    applicationItem.remove();
+                }, 2000);
+            }
+        }
+
+        function rejectApplication(btn) {
+            const applicationItem = btn.closest('.application-item');
+            const name = applicationItem.querySelector('.application-name').textContent;
+            if (confirm(`Bewerbung von ${name} ablehnen?`)) {
+                applicationItem.style.background = 'rgba(220, 20, 60, 0.2)';
+                applicationItem.style.borderColor = '#DC143C';
+                btn.textContent = '❌ Abgelehnt';
+                btn.disabled = true;
+                btn.previousElementSibling.style.display = 'none';
+                setTimeout(() => {
+                    applicationItem.remove();
+                }, 2000);
+            }
+        }
+
+        // Ankündigungen
+        function showAddAnnouncement() {
+            const modal = document.getElementById('addAnnouncementModal');
+            if (modal) {
+                modal.classList.add('active');
+                document.getElementById('announcementTitle').value = '';
+                document.getElementById('announcementDate').value = '';
+                document.getElementById('announcementDesc').value = '';
+            }
+        }
+
+        function closeAddAnnouncement() {
+            const modal = document.getElementById('addAnnouncementModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function handleAddAnnouncement(event) {
+            event.preventDefault();
+            const title = document.getElementById('announcementTitle').value;
+            const date = document.getElementById('announcementDate').value;
+            const desc = document.getElementById('announcementDesc').value;
+
+            const card = document.createElement('div');
+            card.className = 'announcement-card';
+            card.innerHTML = `
+                <button class="delete-btn visible" onclick="deleteAnnouncement(this)">❌</button>
+                <h3>${title}</h3>
+                <div class="date">${date}</div>
+                <p>${desc}</p>
+            `;
+            document.getElementById('announcementsGrid').appendChild(card);
+            closeAddAnnouncement();
+            return false;
+        }
+
+        function deleteAnnouncement(btn) {
+            if (confirm('Möchten Sie diese Ankündigung wirklich löschen?')) {
+                btn.closest('.announcement-card').remove();
+            }
+        }
+
+        // Roadmap
+        function showAddRoadmap() {
+            const modal = document.getElementById('addRoadmapModal');
+            if (modal) {
+                modal.classList.add('active');
+                document.getElementById('roadmapYear').value = '';
+                document.getElementById('roadmapTitle').value = '';
+                document.getElementById('roadmapDesc').value = '';
+            }
+        }
+
+        function closeAddRoadmap() {
+            const modal = document.getElementById('addRoadmapModal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function handleAddRoadmap(event) {
+            event.preventDefault();
+            const year = document.getElementById('roadmapYear').value;
+            const title = document.getElementById('roadmapTitle').value;
+            const desc = document.getElementById('roadmapDesc').value;
+
+            const item = document.createElement('div');
+            item.className = 'timeline-item';
+            item.innerHTML = `
+                <div class="timeline-content">
+                    <button class="delete-btn visible" onclick="deleteRoadmapItem(this)">❌</button>
+                    <div class="year">${year}</div>
+                    <h3>${title}</h3>
+                    <p>${desc}</p>
+                </div>
+                <div class="timeline-marker"></div>
+            `;
+            document.getElementById('timelineContainer').insertBefore(item, document.getElementById('timelineContainer').firstChild);
+            closeAddRoadmap();
+            return false;
+        }
+
+        function deleteRoadmapItem(btn) {
+            if (confirm('Möchten Sie diesen Meilenstein wirklich löschen?')) {
+                btn.closest('.timeline-item').remove();
+            }
+        }
+
+        // Modal schließen bei Klick außerhalb
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+    </script>
+</body>
+</html>
